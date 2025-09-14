@@ -4,11 +4,7 @@ const countdown = document.getElementById("countdown");
 let currentTime = 0;
 
 function updateTime() {
-    if (currentTime == 0) {
-        return;
-    };
-
-    if (Math.random() < 0.250) {
+    if (Math.random() < 0.05) {
         const newBirthday = birthday.value;
         const formattedBirthday = new Date(newBirthday);
         const rightNow = Date.now();
@@ -18,6 +14,15 @@ function updateTime() {
         if (diff <= 0) {
             currentTime = 0;
         };
+    };
+
+    if (currentTime == 0) {
+        countdown.innerText = `0:00:00:00`;
+        alert("🎉🎉HAPPY BIRTHDAY🎉🎉");
+
+        clearInterval(updateCounter);
+
+        return;
     };
 
     currentTime -= 1;
@@ -42,15 +47,6 @@ function updateTime() {
 
     if (hours < 10) {
         hours = "0" + hours;
-    };
-
-    if (currentTime == 0) {
-        countdown.innerText = `0:00:00:00`;
-        alert("🎉🎉HAPPY BIRTHDAY🎉🎉");
-
-        clearInterval(updateCounter);
-
-        return;
     };
 
     const formattedTime = `${days}:${hours}:${minutes}:${seconds}`;
