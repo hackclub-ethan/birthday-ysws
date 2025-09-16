@@ -1,5 +1,8 @@
 const birthday = document.getElementById("birthday");
 const countdown = document.getElementById("countdown");
+const prompt = document.getElementById("aiPrompt");
+const generate = document.getElementById("generate");
+const response = document.getElementById("response");
 
 let currentTime = 0;
 
@@ -54,7 +57,7 @@ function updateTime() {
     countdown.innerText = formattedTime;
 };
 
-let updateCounter = setInterval(updateTime, 1000);
+let updateCounter;
 
 function setBirthday() {
     const newBirthday = birthday.value;
@@ -75,3 +78,35 @@ function setBirthday() {
 };
 
 birthday.addEventListener("change", setBirthday);
+
+function displayResonse(text) {
+    const index = text.indexOf("</think>");
+    const final = text.substring(index + 8).trim();
+
+    response.innerText = final;
+}
+
+function aiPrompt() {
+    const promptText = prompt.value;
+
+    const finalPrompt = "It is the users birthday. Wish them a happy birthday. This is a prompt from the user: " + promptText;
+
+    fetch("https://ai.hackclub.com/chat/completions", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            "messages": [
+                {
+                    "role": "user",
+                    "content": finalPrompt
+                }
+            ]
+        })
+    })
+    .then(res => res.json())
+    .then(text => displayResonse(text["choices"][0]["message"]["content"]));
+};
+
+generate.addEventListener("click", aiPrompt);
