@@ -1,9 +1,32 @@
 * {
     text-align: center;
     background-color: darkblue;
-    color: lightgray;
+    color: white;
 }
 
 #countdown {
     font-size: 100px;
+
+    top: 0px;
+    position: sticky;
+}
+
+#generate {
+    border: solid;
+    border-radius: 12px;
+    border-width: 3px;
+    border-color: black;
+
+    background-color: blue;
+
+    font-size: x-large;
+}
+
+#response {
+    min-width: 80vw;
+    min-height: 20vh;
+
+    border-style: solid;
+    border-width: 5px;
+    border-color: white;
 }

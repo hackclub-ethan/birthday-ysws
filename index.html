@@ -1,34 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
-    <title>Birthday countdown</title>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="A website for the Birthday YSWS from Hackclub. This site has a count down to your birthday and you can generate AI birthday messages!" />
+        
+        <title>Birthday countdown</title>
 
-    <link rel="stylesheet" type="text/css" href="./styles.css" />
+        <link rel="stylesheet" type="text/css" href="./styles.css" />
 
-    <script src="./script.js" defer></script>
-</head>
-<body>
-    <h1>Birthday Countdown</h1>
+        <script src="./script.js" defer></script>
+    </head>
+    <body>
+        <h1>Birthday Countdown</h1>
 
-    <label for="birthday">Birthday</label>
-    <input type="date" name="birthday" id="birthday" />
+        <label for="birthday">Birthday</label>
+        <input type="date" name="birthday" id="birthday" />
 
-    <h2 id="countdown">DD:HH:MM:SS</h2>
+        <h2 id="countdown">HH:MM:SS</h2>
 
-    <hr />
+        <hr />
 
-    <h2>Birthday message</h2>
+        <h2>Birthday message</h2>
 
-    <label for="aiPrompt">Anything you want to make sure the AI knows?</label>
-    <input type="text" name="aiPrompt" id="aiPrompt" />
+        <label for="aiPrompt">Anything you want to make sure the AI knows?</label>
+        <input type="text" name="aiPrompt" id="aiPrompt" />
 
-    <button id="generate">Generate message</button>
+        <br />
+        <br />
 
-    <br />
+        <button id="generate">Generate message</button>
 
-    <textarea id="response" disabled cols="150" rows="10"></textarea>
-</body>
+        <br />
+        <br />
+
+        <p id="response"></p>
+
+        <hr />
+
+        <h2>About</h2>
+
+        <p>Info about this YSWS can be found the <a href="https://birthday-cards.hackclub.com/">their website</a>!</p>
+    </body>
 </html>

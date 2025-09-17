@@ -52,8 +52,21 @@ function updateTime() {
         hours = "0" + hours;
     };
 
-    const formattedTime = `${days}:${hours}:${minutes}:${seconds}`;
+    if (days == 0 && hours == 0) {
+        const formattedTime = `${minutes}:${seconds}`;
+        countdown.innerText = formattedTime;
 
+        return;
+    }
+
+    if (days == 0) {
+        const formattedTime = `${hours}:${minutes}:${seconds}`;
+        countdown.innerText = formattedTime;
+
+        return;
+    }
+
+    const formattedTime = `${days}:${hours}:${minutes}:${seconds}`;
     countdown.innerText = formattedTime;
 };
 
