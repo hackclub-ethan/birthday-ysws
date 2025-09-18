@@ -123,3 +123,40 @@ function aiPrompt() {
 };
 
 generate.addEventListener("click", aiPrompt);
+
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(getWeather);
+    } else {
+        alert("Something went wrong getting your location");
+    };
+};
+
+function getWeather(pos) {
+    let setBirthday = birthday.value;
+
+    if (setBirthday == "") {
+        alert("You did not set a birthday.")
+        return;
+    };
+
+    const currentYear = setBirthday.substring(0,4);
+    const dayMonth = setBirthday.substring(5);
+    // Past 5 years (not including next one)
+    const birthdays = [`${currentYear - 1}-${dayMonth}`, `${currentYear - 2}-${dayMonth}`, `${currentYear - 3}-${dayMonth}`, `${currentYear - 4}-${dayMonth}`, `${currentYear - 5}-${dayMonth}`];
+    const pastWeather = [];
+
+    const url = `https://historical-forecast-api.open-meteo.com/v1/forecast`;
+    
+    for (let i = 0; i < birthdays.length; i++) {
+        const query = `latitude=${pos.coords.latitude}&longitude=${pos.coords.longitude}&start_date=${birthdays[i]}&end_date=${birthdays[i]}&hourly=temperature_2m,precipitation&wind_speed_unit=mph&temperature_unit=fahrenheit&precipitation_unit=inch`;
+
+        fetch(`${url}?${query}`, {
+            method: "GET"
+        })
+        .then(res => res.json())
+        .then(json => pastWeather.push(json));
+    };
+};
+
+document.getElementById("getWeather").addEventListener("click", getLocation)
