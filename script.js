@@ -155,8 +155,37 @@ function getWeather(pos) {
             method: "GET"
         })
         .then(res => res.json())
-        .then(json => pastWeather.push(json));
+        .then(json => pastWeather.push(json))
+        .then(stuff =>{
+            if (pastWeather.length == 5) {
+                dispalyWeather(pastWeather)
+                return;
+            }
+        });
     };
+};
+
+function dispalyWeather(weather) {
+    const average = array => array.reduce((a, b) => a + b) / array.length;
+
+    const avergeTemps = [];
+    const averagePerciptation = [];
+
+    for (let i = 0; i < weather.length; i++) {
+        const precipitation = weather[i]["hourly"]["precipitation"];
+        const temps = weather[i]["hourly"]["temperature_2m"];
+
+        let precipitationAvg = average(precipitation);
+        let tempAvg = average(temps);
+
+        avergeTemps.push(tempAvg);
+        averagePerciptation.push(precipitationAvg);
+    };
+
+    console.log(averagePerciptation);
+    console.log(avergeTemps);
+
+    // create graphs
 };
 
 document.getElementById("getWeather").addEventListener("click", getLocation)
