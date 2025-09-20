@@ -165,6 +165,16 @@ function getWeather(pos) {
     };
 };
 
+function getSum(arr) {
+    let sum = 0;
+
+    for (let i = 0; i < arr.length; i++) {
+        sum += arr[i];
+    }
+
+    return sum;
+}
+
 function dispalyWeather(weather) {
     const average = array => array.reduce((a, b) => a + b) / array.length;
 
@@ -175,17 +185,24 @@ function dispalyWeather(weather) {
         const precipitation = weather[i]["hourly"]["precipitation"];
         const temps = weather[i]["hourly"]["temperature_2m"];
 
-        let precipitationAvg = average(precipitation);
+        let precipitationTotal = getSum(precipitation);
         let tempAvg = average(temps);
 
         avergeTemps.push(tempAvg);
-        averagePerciptation.push(precipitationAvg);
+        averagePerciptation.push(precipitationTotal);
     };
 
-    console.log(averagePerciptation);
-    console.log(avergeTemps);
+    document.getElementById("temp1").innerText = `2024: ${avergeTemps[0].toFixed(2)} F`;
+    document.getElementById("temp2").innerText = `2023: ${avergeTemps[1].toFixed(2)} F`;
+    document.getElementById("temp3").innerText = `2022: ${avergeTemps[2].toFixed(2)} F`;
+    document.getElementById("temp4").innerText = `2021: ${avergeTemps[3].toFixed(2)} F`;
+    document.getElementById("temp5").innerText = `2020: ${avergeTemps[4].toFixed(2)} F`;
 
-    // create graphs
+    document.getElementById("precp1").innerText = `2024: ${averagePerciptation[0].toFixed(2)} in`;
+    document.getElementById("precp2").innerText = `2023: ${averagePerciptation[1].toFixed(2)} in`;
+    document.getElementById("precp3").innerText = `2022: ${averagePerciptation[2].toFixed(2)} in`;
+    document.getElementById("precp4").innerText = `2021: ${averagePerciptation[3].toFixed(2)} in`;
+    document.getElementById("precp5").innerText = `2020: ${averagePerciptation[4].toFixed(2)} in`;
 };
 
 document.getElementById("getWeather").addEventListener("click", getLocation)
